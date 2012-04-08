@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title> +κατοικώ
+    </title>
+    <link rel="stylesheet" href="css/jquery.mobile-1.0.1.min.css"/>
+    <link rel="stylesheet" href="css/custom.css"/>
+
+    <script src=js/jquery-1.6.2.min.js></script>
+    <script src="js/jquery.mobile-1.0.1.min.js"></script>
+    <script src="js/custom.js"></script>
+</head>
+<body>
+
+<!--login page-->
+<div data-role="page" id="login">
+    <div data-theme="a" data-role="header">
+        <h3>
+            roommates
+        </h3>
+    </div>
+    <div data-role="content">
+<div id="welcome">
+        <img src="images/logo.png" alt="logo">
+    <br>
+    <h2>Βρές Συγκάτοικο</h2>
+    <h2>Βρές Σπίτι!</h2>
+</div>
+                <input id="username" placeholder="Username" value="" type="text"/>
+                <input id="password" placeholder="Password" value="" type="password"/>
+
+        <div id="logmsg">
+        </div>
+        <input type="submit" onclick="saveLogin();" data-theme="b" value="Σύνδεση"/>
+
+        <div id='helplogin'>* Οι φοιτητές του ΤΕΙ Αθήνας μπορούν να εισέρχονται στο σύστημα με την χρήση
+            των στοιχείων πρόσβασης των δικτυακών υπηρεσιών του Ιδρύματος
+            (e-mail, wifi, εύδοξος κ.ο.κ.)</div>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <h3>
+            +κατοικώ
+        </h3>
+    </div>
+</div>
+<!--Index page-->
+<div data-role="page" id="index">
+    <div data-theme="a" data-role="header">
+        <h3>
+            Roommates
+        </h3>
+    </div>
+    <div data-role="content">
+        <div id="dashboard">
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <h3>
+                        <a href="#user"><img src="images/profile.png" alt="image"/><br>Το προφίλ μου</a>
+                    </h3>
+                </div>
+                <div class="ui-block-b">
+
+                    <h3>
+                        <a href="#house"><img src="images/home.png" alt="image"/><br>Το σπίτι μου</a>
+                    </h3>
+                </div>
+                <div class="ui-block-a">
+
+                    <h3>
+                        <!--<a href="#users"><img src="images/profiles.png" alt="image" /><br>Συγκάτοικοι</a>-->
+                        <a href="#"><img src="images/profiles.png" alt="image"  onclick="getusers();"/><br>Συγκάτοικοι</a>
+                    </h3>
+                </div>
+                <div class="ui-block-b">
+
+                    <h3>
+                        <!--<a href="#houses"><img src="images/houses.png" alt="image" /><br>Σπίτια</a>-->
+                        <a href="#"><img src="images/houses.png" alt="image" onclick="gethouses();"/><br>Σπίτια</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <h3>
+            +κατοικώ
+        </h3>
+    </div>
+</div>
+<!--houses page-->
+<div data-role="page" id="houses">
+    <div data-theme="a" data-role="header">
+        <h3>
+            Διαθέσιμα Σπίτια
+        </h3>
+        <a href="#index" data-icon="home">Home</a>
+
+    </div>
+    <div data-role="content">
+        <ul data-role="listview" data-divider-theme="a" data-inset="true">
+            <li data-role="list-divider" role="heading">
+                Λίστα Σπιτιών
+            </li>
+            <li>
+                <a href="#house" data-transition="slide">
+                    διαμέρισμα, 56 τ.μ.
+                </a>
+            </li>
+            <li>
+                <a href="#house" data-transition="slide">
+                    διαμέρισμα, 62 τ.μ.
+                </a>
+            </li>
+            <li>
+                <a href="#house" data-transition="slide">
+                    διαμέρισμα, 70 τ.μ.
+                </a>
+            </li>
+
+        </ul>
+    </div>
+    <div data-theme="a" data-role="footer">
+        <h3>
+            +κατοικώ
+        </h3>
+
+    </div>
+</div>
+<!--house page-->
+<div data-role="page" id="house">
+    <div data-theme="a" data-role="header">
+        <h2>
+            Στοιχεία σπιτιού
+        </h2>
+        <a href="#index" data-icon="home">Home</a>
+        <a href="#house-edit" data-icon="gear">edit</a>
+
+    </div>
+    <div data-role="content">
+            <div class="ac">
+                <img src="images/home-default.png" alt="image"/>
+            </div>
+                <h3>
+                    Διεύθυνση : Σουλίου 20
+                </h3>
+
+                <ul data-role="listview" data-inset="true" class="ui-listview">
+
+                    <li class="ui-li ui-li-static ui-body-c"> Δήμος : ΑΙΓΑΛΕΩ
+                    <li class="ui-li ui-li-static ui-body-c"> Τ.Κ. : 14243
+                    <li class="ui-li ui-li-static ui-body-c"> Τύπος : γκαρσονιέρα
+                    <li class="ui-li ui-li-static ui-body-c"> Εμβαδόν : 100 τ.μ.
+                </ul>
+
+        <div data-role="collapsible-set" data-theme="a" data-content-theme="d">
+            <div data-role="collapsible" data-collapsed="true">
+                <h3>
+                    Στοιχεία σπιτιού
+                </h3>
+
+
+                <ul data-role="listview" data-inset="true" class="ui-listview">
+                    <li class="ui-li ui-li-static ui-body-c"> Υπνοδωμάτια : 2
+                    <li class="ui-li ui-li-static ui-body-c"> Μπάνια : 1
+                    <li class="ui-li ui-li-static ui-body-c"> Όροφος : 3ος όροφος
+                    <li class="ui-li ui-li-static ui-body-c"> Έτος κατασκευής : 1993
+                    <li class="ui-li ui-li-static ui-body-c"> Θέρμανση : δεν διαθέτει
+                    <li class="ui-li ui-li-static ui-body-c"> Ενοίκιο : 220 €
+                    <li class="ui-li ui-li-static ui-body-c"> Διαθέσιμο από : 26-03-2012
+                    <li class="ui-li ui-li-static ui-body-c"> Περίοδος συγκατοίκησης : 12 μήνες
+                    <li class="ui-li ui-li-static ui-body-c"> Διαμένουν : 1 άτομο
+                    <li class="ui-li ui-li-static ui-body-c"> Διαθέσιμες θέσεις : 1 (από 2 συνολικά)
+                    <li class="ui-li ui-li-static ui-body-c"> Απόσταση από ΤΕΙ : δεν διατίθεται
+                </ul>
+
+
+            </div>
+            <div data-role="collapsible" data-collapsed="true">
+                <h3>
+                    Πρόσθετα Στοιχεία σπιτιού
+                </h3>
+                <ul data-role="listview" data-inset="true" class="ui-listview">
+
+                    <li class="ui-li ui-li-static ui-body-c"> Ηλιακός : όχι
+                    <li class="ui-li ui-li-static ui-body-c"> Επιπλωμένο : όχι
+                    <li class="ui-li ui-li-static ui-body-c"> Κλιματισμός : ναι
+                    <li class="ui-li ui-li-static ui-body-c"> Κήπος : όχι
+                    <li class="ui-li ui-li-static ui-body-c"> Θέση στάθμευσης : όχι
+                    <li class="ui-li ui-li-static ui-body-c"> Κοινόχρηστα : όχι
+                    <li class="ui-li ui-li-static ui-body-c"> Πόρτα ασφαλείας : όχι
+                    <li class="ui-li ui-li-static ui-body-c"> Προσβάσιμο από ΑΜΕΑ : όχι
+
+                </ul>
+            </div>
+        </div>
+
+        <div>
+
+            <a href="#user" data-theme="a" data-role="button" data-icon="arrow-r" data-iconpos="right">Profile ιδιοκτήτη</a>
+
+        </div>
+    </div>
+        <div data-theme="a" data-role="footer">
+            <h3>
+                +κατοικώ
+            </h3>
+        </div>
+
+</div>
+<!--users page-->
+<div data-role="page" id="users">
+    <div data-theme="a" data-role="header">
+        <h3>
+            Ενεργά Profiles
+        </h3>
+        <a href="#index" data-icon="home">Home</a>
+
+    </div>
+    <div data-role="content">
+        <div data-role="collapsible-set" data-theme="" data-content-theme="">
+        </div>
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            <li data-role="list-divider" role="heading">
+                Λίστα Profiles
+            </li>
+            <li data-theme="c">
+                <a href="#user" data-transition="slide">
+                    Φώτης Αδαμάκης
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#user" data-transition="slide">
+                    Δημοσθένης Νικούδης
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#user" data-transition="slide">
+                    Χρυσάνθη Αλεξίου
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#user" data-transition="slide">
+                    Τάσος Λάτσας
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#user" data-transition="slide">
+                    Θανάσης Καρέτσος
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div data-theme="a" data-role="footer">
+        <h3>
+            +κατοικώ
+        </h3>
+    </div>
+</div>
+<!--user page-->
+<div data-role="page" id="user">
+    <div data-theme="a" data-role="header">
+        <h2>
+            Το προφίλ μου
+        </h2>
+        <a href="#index" data-icon="home">Home</a>
+
+    </div>
+    <div data-role="content">
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <div class="ac">
+                <img src="images/profile-default.jpg" alt="image"/>
+            </div>
+            </div>
+            <div class="ui-block-b">
+                <h3>
+                    ΦΩΤΙΟΣ ΑΔΑΜΑΚΗΣ
+                </h3>
+                <ul data-role="listview" data-inset="true" class="ui-listview">
+
+                    <li class="ui-li ui-li-static ui-body-c"> Άνδρας
+                    <li class="ui-li ui-li-static ui-body-c"> 23 ετών
+                    <li class="ui-li ui-li-static ui-body-c"> cs070094@teiath.gr
+                    <li class="ui-li ui-li-static ui-body-c"> 6972785669
+                </ul>
+            </div>
+
+        </div>
+
+        <div data-role="collapsible-set" data-theme="a" data-content-theme="d">
+            <div data-role="collapsible" data-collapsed="true">
+                <h3>
+                    Στοιχεία Προφίλ
+                </h3>
+
+
+                <ul data-role="listview" data-inset="true" class="ui-listview">
+                    <li class="ui-li ui-li-static ui-body-c"> Είμαι 1 άτομο
+                    <li class="ui-li ui-li-static ui-body-c"> Ζητείται 1 άτομο
+                    <li class="ui-li ui-li-static ui-body-c"> Ζευγάρι: όχι
+                    <li class="ui-li ui-li-static ui-body-c"> Παιδί: όχι
+                    <li class="ui-li ui-li-static ui-body-c"> Κατοικίδιο: όχι
+                    <li class="ui-li ui-li-static ui-body-c"> Καπνιστής: όχι
+                </ul>
+
+
+            </div>
+            <div data-role="collapsible" data-collapsed="true">
+                <h3>
+                    Προτιμήσεις συγκατοίκου
+                </h3>
+                <ul data-role="listview" data-inset="true" class="ui-listview">
+
+                    <li class="ui-li ui-li-static ui-body-c"> Ηλικία από: 19
+                    <li class="ui-li ui-li-static ui-body-c"> Φύλο: αδιάφορο
+                    <li class="ui-li ui-li-static ui-body-c"> Κατοικίδιο: αδιάφορο
+                    <li class="ui-li ui-li-static ui-body-c"> Παιδί: αδιάφορο
+                    <li class="ui-li ui-li-static ui-body-c"> Ζευγάρι: αδιάφορο
+                </ul>
+            </div>
+            <div data-role="collapsible" data-collapsed="true">
+                <h3>
+                    Προτιμήσεις Σπιτιού
+                </h3>
+                <ul data-role="listview" data-inset="true" class="ui-listview">
+
+                    <li class="ui-li ui-li-static ui-body-c"> Τιμή: μέχρι 300
+                    <li class="ui-li ui-li-static ui-body-c"> Εμβαδόν: τ.μ. μέχρι 200 τ.μ.
+                    <li class="ui-li ui-li-static ui-body-c"> Επιπλωμένο: ναι
+                </ul>
+            </div>
+        </div>
+        <div>
+
+            <a href="#house" data-theme="a" data-role="button" data-icon="arrow-r" data-iconpos="right">Σπίτι χρήστη</a>
+
+        </div>
+    </div>
+    <div data-theme="a" data-role="footer">
+        <h3>
+            +κατοικώ
+        </h3>
+    </div>
+</div>
+<!--house edit page-->
+<div data-role="page" id="house-edit">
+    <div data-theme="a" data-role="header">
+        <h3>
+            Επεξεργασια Σπιτιού
+        </h3>
+        <a href="#index" data-icon="home">Home</a>
+
+    </div>
+    <div data-role="content">
+
+
+                <label for="textinput1">
+                    Οδός
+                </label>
+                <input id="textinput1" placeholder="" value="" type="text"/>
+
+                <label for="textinput2">
+                    Τετραγωνικά
+                </label>
+                <input id="textinput2" placeholder="" value="" type="number"/>
+
+                <label for="textinput3">
+                    Τιμή
+                </label>
+                <input id="textinput3" placeholder="" value="" type="number"/>
+
+                <label for="textinput4">
+                    Διαθεσιμο απο
+                </label>
+                <input id="textinput4" placeholder="" value="" type="date"/>
+
+                <label for="toggleswitch3">
+                    Κοινοχρηστα
+                </label>
+                <select name="toggleswitch3" id="toggleswitch3" data-theme="" data-role="slider">
+                    <option value="off">
+                        Οχι
+                    </option>
+                    <option value="on">
+                        Ναι
+                    </option>
+                </select>
+
+                <label for="toggleswitch2">
+                    Έπιπλα
+                </label>
+                <select name="toggleswitch2" id="toggleswitch2" data-theme="" data-role="slider">
+                    <option value="off">
+                        Όχι
+                    </option>
+                    <option value="on">
+                        Ναι
+                    </option>
+                </select>
+
+        <input type="submit" data-theme="b" data-icon="check" data-iconpos="left" value="Υποβολή"/>
+    </div>
+<div data-theme="a" data-role="footer">
+    <h3>
+        +κατοικώ
+    </h3>
+</div>
+</div>
+
+<div data-role="page" id="houseslist">
+    <div data-theme="a" data-role="header">
+        <h3>
+            Roommates
+        </h3>
+    </div>
+    <div data-role="content">
+        <ul id="list-houses" data-role="listview" data-inset="true">
+        </ul>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <h3>
+            +κατοικώ
+        </h3>
+    </div>
+</div>
+
+
+<div data-role="page" id="userslist">
+    <div data-theme="a" data-role="header">
+        <h3>
+            Roommates
+        </h3>
+    </div>
+    <div data-role="content">
+        <ul id="list-users" data-role="listview" data-inset="true">
+        </ul>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <h3>
+            +κατοικώ
+        </h3>
+    </div>
+</div>
+
+
+
+<div data-role="page" id="student">
+    <div data-theme="a" data-role="header">
+        <h2>
+             Προφίλ
+        </h2>
+        <a href="#index" data-icon="home">Home</a>
+
+    </div>
+    <div data-role="content">
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <div class="ac">
+                    <img src="images/profile-default.jpg" alt="image"/>
+                </div>
+            </div>
+            <div class="ui-block-b">
+                <h3>
+                    <span id="fullname">fullname</span>
+                </h3>
+                <ul data-role="listview" data-inset="true" class="ui-listview" id="user-1">
+
+                </ul>
+            </div>
+
+        </div>
+
+        <div data-role="collapsible-set" data-theme="a" data-content-theme="d">
+            <div data-role="collapsible" data-collapsed="false">
+                <h3>
+                    Στοιχεία Προφίλ
+                </h3>
+
+
+                <ul data-role="listview" data-inset="true" class="ui-listview">
+                    <li class="ui-li ui-li-static ui-body-c"> <span id="weare">Πόσοι ψάχνουν σπίτι</span>
+                    <li class="ui-li ui-li-static ui-body-c"> <span id="looking">Μέγιστος επιθυμητός αριθμός συγκατοίκων</span>
+                    <li class="ui-li ui-li-static ui-body-c"> Ζευγάρι: όχι
+                    <li class="ui-li ui-li-static ui-body-c"> Παιδί: όχι
+                    <li class="ui-li ui-li-static ui-body-c"> Κατοικίδιο: όχι
+                    <li class="ui-li ui-li-static ui-body-c"> Καπνιστής: όχι
+                </ul>
+
+
+            </div>
+            <div data-role="collapsible" data-collapsed="true">
+                <h3>
+                    Προτιμήσεις συγκατοίκου
+                </h3>
+                <ul data-role="listview" data-inset="true" class="ui-listview">
+
+                    <li class="ui-li ui-li-static ui-body-c"> Ηλικία από: 19
+                    <li class="ui-li ui-li-static ui-body-c"> Φύλο: αδιάφορο
+                    <li class="ui-li ui-li-static ui-body-c"> Κατοικίδιο: αδιάφορο
+                    <li class="ui-li ui-li-static ui-body-c"> Παιδί: αδιάφορο
+                    <li class="ui-li ui-li-static ui-body-c"> Ζευγάρι: αδιάφορο
+                </ul>
+            </div>
+            <div data-role="collapsible" data-collapsed="true">
+                <h3>
+                    Προτιμήσεις Σπιτιού
+                </h3>
+                <ul data-role="listview" data-inset="true" class="ui-listview">
+
+                    <li class="ui-li ui-li-static ui-body-c"> Τιμή: μέχρι 300
+                    <li class="ui-li ui-li-static ui-body-c"> Εμβαδόν: τ.μ. μέχρι 200 τ.μ.
+                    <li class="ui-li ui-li-static ui-body-c"> Επιπλωμένο: ναι
+                </ul>
+            </div>
+        </div>
+        <div>
+
+            <a href="#house" data-theme="a" data-role="button" data-icon="arrow-r" data-iconpos="right">Σπίτι χρήστη</a>
+
+        </div>
+    </div>
+    <div data-theme="a" data-role="footer">
+        <h3>
+            +κατοικώ
+        </h3>
+    </div>
+</div>
+
+
+<div data-role="page" id="home">
+    <div data-theme="a" data-role="header">
+        <h2>
+            Στοιχεία σπιτιού
+        </h2>
+        <a href="#index" data-icon="home">Home</a>
+        <a href="#house-edit" data-icon="gear">edit</a>
+
+    </div>
+    <div data-role="content">
+        <div class="ac">
+            <img src="images/home-default.png" alt="image"/>
+        </div>
+
+        <ul data-role="listview" data-inset="true">
+            <li class="ui-li ui-li-static ui-body-c" id="type">
+            <li class="ui-li ui-li-static ui-body-c" id="area">
+            <li class="ui-li ui-li-static ui-body-c" id="address">
+            <li class="ui-li ui-li-static ui-body-c" id="dimos">
+            <li class="ui-li ui-li-static ui-body-c"  id="price">
+
+        </ul>
+
+        <div data-role="collapsible-set" data-theme="a" data-content-theme="d">
+            <div data-role="collapsible" data-collapsed="true">
+                <h3>
+                    Στοιχεία σπιτιού
+                </h3>
+
+
+                <ul data-role="listview" data-inset="true" class="ui-listview">
+                    <li class="ui-li ui-li-static ui-body-c">Υπνοδωμάτια : <span id="bedrooms"></span>
+                    <li class="ui-li ui-li-static ui-body-c">Μπάνια : <span id="bathrooms"></span>
+                    <li class="ui-li ui-li-static ui-body-c"> <span id="floor"></span>
+                    <li class="ui-li ui-li-static ui-body-c">Έτος κατασκευής : <span id="year"></span>
+                    <li class="ui-li ui-li-static ui-body-c">Θέρμανση : <span id="heating"></span>
+                    <li class="ui-li ui-li-static ui-body-c">Διαθέσιμο από : <span id="available"></span>
+                    <li class="ui-li ui-li-static ui-body-c">Διαμένουν :  <span id="living"></span>
+                    <li class="ui-li ui-li-static ui-body-c">Διαθέσιμες θέσεις : <span id="availability"></span>
+                    <li class="ui-li ui-li-static ui-body-c">Απόσταση από ΤΕΙ : <span id="distance"></span>
+                </ul>
+
+
+            </div>
+            <div data-role="collapsible" data-collapsed="true">
+                <h3>
+                    Πρόσθετα Στοιχεία σπιτιού
+                </h3>
+                <ul data-role="listview" data-inset="true" class="ui-listview">
+
+                    <li class="ui-li ui-li-static ui-body-c"> Ηλιακός : <span id="solar"></span>
+                    <li class="ui-li ui-li-static ui-body-c"> Επιπλωμένο : <span id="furniture"></span>
+                    <li class="ui-li ui-li-static ui-body-c"> Κλιματισμός : <span id="clima"></span>
+                    <li class="ui-li ui-li-static ui-body-c"> Κήπος : <span id="garden"></span>
+                    <li class="ui-li ui-li-static ui-body-c"> Θέση στάθμευσης : <span id="parking"></span>
+                    <li class="ui-li ui-li-static ui-body-c"> Κοινόχρηστα : <span id="shared-pay"></span>
+                    <li class="ui-li ui-li-static ui-body-c"> Πόρτα ασφαλείας : <span id="doors"></span>
+                    <li class="ui-li ui-li-static ui-body-c"> Προσβάσιμο από ΑΜΕΑ : <span id="amea"></span>
+
+                </ul>
+            </div>
+        </div>
+
+        <div>
+
+            <a href="#" data-theme="a" data-role="button" data-icon="arrow-r" data-iconpos="right" onclick="getuser(localStorage.userid);"> Profile ιδιοκτήτη</a>
+
+        </div>
+    </div>
+    <div data-theme="a" data-role="footer">
+        <h3>
+            +κατοικώ
+        </h3>
+    </div>
+
+</div>
+
+
+
+
+
+
+<script>
+
+    //App custom javascript
+</script>
+</body>
+</html>
