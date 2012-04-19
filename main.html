@@ -135,7 +135,7 @@
             Στοιχεία σπιτιού
         </h2>
         <a href="#index" data-icon="home">Home</a>
-        <a href="#house-edit" data-icon="gear">edit</a>
+        <a href="#house-edit" data-icon="gear" onclick="edithouse()">edit</a>
 
     </div>
     <div data-role="content">
@@ -346,69 +346,6 @@
     </div>
 </div>
 <!--house edit page-->
-<div data-role="page" id="house-edit">
-    <div data-theme="a" data-role="header">
-        <h3>
-            Επεξεργασια Σπιτιού
-        </h3>
-        <a href="#index" data-icon="home">Home</a>
-
-    </div>
-    <div data-role="content">
-
-
-                <label for="textinput1">
-                    Οδός
-                </label>
-                <input id="textinput1" placeholder="" value="" type="text"/>
-
-                <label for="textinput2">
-                    Τετραγωνικά
-                </label>
-                <input id="textinput2" placeholder="" value="" type="number"/>
-
-                <label for="textinput3">
-                    Τιμή
-                </label>
-                <input id="textinput3" placeholder="" value="" type="number"/>
-
-                <label for="textinput4">
-                    Διαθεσιμο απο
-                </label>
-                <input id="textinput4" placeholder="" value="" type="date"/>
-
-                <label for="toggleswitch3">
-                    Κοινοχρηστα
-                </label>
-                <select name="toggleswitch3" id="toggleswitch3" data-theme="" data-role="slider">
-                    <option value="off">
-                        Οχι
-                    </option>
-                    <option value="on">
-                        Ναι
-                    </option>
-                </select>
-
-                <label for="toggleswitch2">
-                    Έπιπλα
-                </label>
-                <select name="toggleswitch2" id="toggleswitch2" data-theme="" data-role="slider">
-                    <option value="off">
-                        Όχι
-                    </option>
-                    <option value="on">
-                        Ναι
-                    </option>
-                </select>
-
-        <input type="submit" data-theme="b" data-icon="check" data-iconpos="left" value="Υποβολή"/>
-    </div>
-<div data-theme="a" data-role="footer">
-    <h3>
-        +κατοικώ
-    </h3>
-</div>
-</div>
 
 <div data-role="page" id="houseslist">
     <div data-theme="a" data-role="header">
@@ -435,7 +372,7 @@
         </h3>
     </div>
     <div data-role="content">
-        <ul id="list-users" data-role="listview" data-inset="true">
+        <ul id="listusers" data-role="listview" data-inset="true">
         </ul>
     </div>
     <div data-theme="a" data-role="footer" data-position="fixed">
@@ -606,9 +543,6 @@
     </div>
 
 </div>
-
-
-
 
 
 

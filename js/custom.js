@@ -27,12 +27,10 @@ function saveLogin() {
     }
 }
 
-
 function gethouses() {
     var items = [];
-    $.getJSON('http://localhost/w/ajax/houses.json', function (data) {
+    $.getJSON('http://localhost/w/roommates/webservice/houses', function (data) {
         var items = [];
-        console.log(data);
         $.each(data, function (key, val) {
             items.push('<li><a  href="#" data-transition="slide" onclick="gethouse(' + val.House.id + ');" >' + val.House.address + '</a></li>');
         });
@@ -43,17 +41,37 @@ function gethouses() {
 }
 
 function getusers() {
-    $.getJSON('http://localhost/w/ajax/users.json', function (data) {
-        var items = [];
-        $.each(data, function (key, val) {
-            if (val.student) {
-                items.push('<li><a  href="#" data-transition="slide" onclick="getuser(' + val.student.id + ');" >' + val.student.firstname + ' ' + val.student.lastname + '</a></li>');
-            }
-        });
-        $("#list-users").html(items.join(''));
-        $("#list-users").listview("refresh");
+    var items = [];
 
-    });
+    $.ajax
+        ({
+            type:"GET",
+            url:"http://localhost/w/roommates/webservice/users",
+            dataType:'json',
+            beforeSend:function (xhr) {
+                var creds = 'user1:roommates';
+                var basicScheme = btoa(creds);
+                var hashStr = "Basic "+basicScheme;
+                xhr.setRequestHeader('Authorization', hashStr);
+                xhr.setRequestHeader('accept', 'application/json');
+            },
+            success:function (data) {
+                var items = [];
+                console.log(data);
+                $.each(data, function (key, val) {
+                    console.log(val);
+
+                    if (val.student) {
+
+                        items.push('<li><a  href="#" data-transition="slide" onclick="getuser(' + val.student.id + ');" >' + val.student.firstname + ' ' + val.student.lastname + '</a></li>');
+                    }
+                });
+
+                $("#listusers").html(items.join(''));
+                $("#listusers").listview("refresh");
+
+            }
+});
     $.mobile.changePage("#userslist");
 }
 
@@ -98,29 +116,6 @@ function gethouse(hid) {
 
 }
 
-
-function getuser2(uid) {
-
-    $.getJSON('http://localhost/w/ajax/user62.json', function (data) {
-        console.log(data);
-        $.each(data, function (key, val) {
-            if (val) {
-
-                $("#weare").html(val.we_are);
-                $("#looking").html(val.max_roommates);
-
-
-            }
-        });
-
-    });
-
-    $.mobile.changePage("#student");
-
-
-}
-
-
 function getuser(uid) {
     $.getJSON('http://localhost/w/ajax/user6.json', function (data) {
 
@@ -128,10 +123,18 @@ function getuser(uid) {
         $.each(data, function (key, val) {
             $("#fullname").html(val.firstname + ' ' + val.lastname);
 
-            if (val.gender) {items.push('<li class="ui-li ui-li-static ui-body-c">' + getgender(val.gender));}
-            if (val.dob)    {items.push('<li class="ui-li ui-li-static ui-body-c">' + getage(val.dob));}
-            if (val.email)  {items.push('<li class="ui-li ui-li-static ui-body-c"><a href="mailto:' + val.email +'"></a>');}
-            if (val.phone)  {items.push('<li class="ui-li ui-li-static ui-body-c"><a href="tel:' + val.phone +'"></a>');}
+            if (val.gender) {
+                items.push('<li class="ui-li ui-li-static ui-body-c">' + getgender(val.gender));
+            }
+            if (val.dob) {
+                items.push('<li class="ui-li ui-li-static ui-body-c">' + getage(val.dob));
+            }
+            if (val.email) {
+                items.push('<li class="ui-li ui-li-static ui-body-c"><a href="mailto:' + val.email + '"></a>');
+            }
+            if (val.phone) {
+                items.push('<li class="ui-li ui-li-static ui-body-c"><a href="tel:' + val.phone + '"></a>');
+            }
         });
         $("#user-1").html(items.join(''));
         $("#user-1").listview("refresh");
@@ -139,7 +142,6 @@ function getuser(uid) {
     });
     $.mobile.changePage("#student");
 }
-
 
 
 function getgender(g) {
