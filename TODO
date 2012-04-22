@@ -1,10 +1,13 @@
 
-    protimiseis sugkatoikoy-spitiou
+    να μην εμφανιζονται τα αδεια πεδια
+    να φαινεται ναι ή οχι και οχι 1 ή 0
     user & house id
-    edit spitiou
-    pagination
     images
+    pagination
     take/upload picture
     map
+    protimiseis sugkatoikoy-spitiou
+    edit spitiou
     datepicker
-    call
+
+
