@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title> +κατοικώ
     </title>
-    <link rel="stylesheet" href="css/jquery.mobile-1.0.1.min.css"/>
+    <link rel="stylesheet" href="css/jquery.mobile-1.1.0.min.css"/>
     <link rel="stylesheet" href="css/custom.css"/>
 
-    <script src=js/jquery-1.6.2.min.js></script>
-    <script src="js/jquery.mobile-1.0.1.min.js"></script>
+    <script src=js/jquery-1.7.2.min.js></script>
+    <script src="js/jquery.mobile-1.1.0.min.js"></script>
+    <script src="js/lawnchair-0.6.1.min.js"></script>
     <script src="js/custom.js"></script>
 </head>
 <body>
@@ -22,22 +23,25 @@
         </h3>
     </div>
     <div data-role="content">
-<div id="welcome">
-        <img src="images/logo.png" alt="logo">
-    <br>
-    <h2>Βρές Συγκάτοικο</h2>
-    <h2>Βρές Σπίτι!</h2>
-</div>
-                <input id="username" placeholder="Username" value="" type="text"/>
-                <input id="password" placeholder="Password" value="" type="password"/>
+        <div id="welcome">
+            <img src="images/logo.png" alt="logo">
+            <br>
 
-        <div id="logmsg">
+            <h2>Βρές Συγκάτοικο</h2>
+
+            <h2>Βρές Σπίτι!</h2>
         </div>
-        <input type="submit" onclick="saveLogin();" data-theme="b" value="Σύνδεση"/>
+
+        <input id="username" placeholder="Username" value="user1" type="text"/>
+        <input id="password" placeholder="Password" value="roommates" type="password"/>
+        <div id="logmsg" class=ac></div>
+
+        <input type="button" onclick="login();" data-theme="b" value="Σύνδεση"/>
 
         <div id='helplogin'>* Οι φοιτητές του ΤΕΙ Αθήνας μπορούν να εισέρχονται στο σύστημα με την χρήση
             των στοιχείων πρόσβασης των δικτυακών υπηρεσιών του Ιδρύματος
-            (e-mail, wifi, εύδοξος κ.ο.κ.)</div>
+            (e-mail, wifi, εύδοξος κ.ο.κ.)
+        </div>
     </div>
     <div data-theme="a" data-role="footer" data-position="fixed">
         <h3>
@@ -70,14 +74,14 @@
 
                     <h3>
                         <!--<a href="#users"><img src="images/profiles.png" alt="image" /><br>Συγκάτοικοι</a>-->
-                        <a href="#"><img src="images/profiles.png" alt="image"  onclick="getusers();"/><br>Συγκάτοικοι</a>
+                        <a href="#userslist"><img src="images/profiles.png" alt="image"/><br>Συγκάτοικοι</a>
                     </h3>
                 </div>
                 <div class="ui-block-b">
 
                     <h3>
                         <!--<a href="#houses"><img src="images/houses.png" alt="image" /><br>Σπίτια</a>-->
-                        <a href="#"><img src="images/houses.png" alt="image" onclick="gethouses();"/><br>Σπίτια</a>
+                        <a href="#houseslist"><img src="images/houses.png" alt="image"/><br>Σπίτια</a>
                     </h3>
                 </div>
             </div>
@@ -139,20 +143,20 @@
 
     </div>
     <div data-role="content">
-            <div class="ac">
-                <img src="images/home-default.png" alt="image"/>
-            </div>
-                <h3>
-                    Διεύθυνση : Σουλίου 20
-                </h3>
+        <div class="ac">
+            <img src="images/home-default.png" alt="image"/>
+        </div>
+        <h3>
+            Διεύθυνση : Σουλίου 20
+        </h3>
 
-                <ul data-role="listview" data-inset="true" class="ui-listview">
+        <ul data-role="listview" data-inset="true" class="ui-listview">
 
-                    <li class="ui-li ui-li-static ui-body-c"> Δήμος : ΑΙΓΑΛΕΩ
-                    <li class="ui-li ui-li-static ui-body-c"> Τ.Κ. : 14243
-                    <li class="ui-li ui-li-static ui-body-c"> Τύπος : γκαρσονιέρα
-                    <li class="ui-li ui-li-static ui-body-c"> Εμβαδόν : 100 τ.μ.
-                </ul>
+            <li class="ui-li ui-li-static ui-body-c"> Δήμος : ΑΙΓΑΛΕΩ
+            <li class="ui-li ui-li-static ui-body-c"> Τ.Κ. : 14243
+            <li class="ui-li ui-li-static ui-body-c"> Τύπος : γκαρσονιέρα
+            <li class="ui-li ui-li-static ui-body-c"> Εμβαδόν : 100 τ.μ.
+        </ul>
 
         <div data-role="collapsible-set" data-theme="a" data-content-theme="d">
             <div data-role="collapsible" data-collapsed="true">
@@ -198,15 +202,16 @@
 
         <div>
 
-            <a href="#user" data-theme="a" data-role="button" data-icon="arrow-r" data-iconpos="right">Profile ιδιοκτήτη</a>
+            <a href="#user" data-theme="a" data-role="button" data-icon="arrow-r" data-iconpos="right">Profile
+                ιδιοκτήτη</a>
 
         </div>
     </div>
-        <div data-theme="a" data-role="footer">
-            <h3>
-                +κατοικώ
-            </h3>
-        </div>
+    <div data-theme="a" data-role="footer">
+        <h3>
+            +κατοικώ
+        </h3>
+    </div>
 
 </div>
 <!--users page-->
@@ -269,13 +274,11 @@
 
     </div>
     <div data-role="content">
-        <div class="ui-grid-a">
-            <div class="ui-block-a">
+
                 <div class="ac">
-                <img src="images/profile-default.jpg" alt="image"/>
-            </div>
-            </div>
-            <div class="ui-block-b">
+                    <img src="images/profile-default.jpg" alt="image"/>
+                </div>
+
                 <h3>
                     ΦΩΤΙΟΣ ΑΔΑΜΑΚΗΣ
                 </h3>
@@ -284,11 +287,13 @@
                     <li class="ui-li ui-li-static ui-body-c"> Άνδρας
                     <li class="ui-li ui-li-static ui-body-c"> 23 ετών
                     <li class="ui-li ui-li-static ui-body-c"> cs070094@teiath.gr
-                    <li class="ui-li ui-li-static ui-body-c"> 6972785669
                 </ul>
-            </div>
 
+        <div data-role="controlgroup" data-type="horizontal" class=ac>
+            <a href="tel:6972785669" data-role="button"><img src="images/tel.png" alt="make a call"></a>
+            <a href="sms:6972785669" data-role="button"><img src="images/sms.png" alt="send sms"></a>
         </div>
+
 
         <div data-role="collapsible-set" data-theme="a" data-content-theme="d">
             <div data-role="collapsible" data-collapsed="true">
@@ -372,7 +377,9 @@
         </h3>
     </div>
     <div data-role="content">
-        <ul id="listusers" data-role="listview" data-inset="true">
+        <ul class="listusers" data-role="listview" data-inset="true">
+
+          <li>test</li>
         </ul>
     </div>
     <div data-theme="a" data-role="footer" data-position="fixed">
@@ -383,32 +390,26 @@
 </div>
 
 
-
 <div data-role="page" id="student">
     <div data-theme="a" data-role="header">
         <h2>
-             Προφίλ
+            Προφίλ
         </h2>
         <a href="#index" data-icon="home">Home</a>
 
     </div>
     <div data-role="content">
-        <div class="ui-grid-a">
-            <div class="ui-block-a">
                 <div class="ac">
                     <img src="images/profile-default.jpg" alt="image"/>
                 </div>
-            </div>
-            <div class="ui-block-b">
+
                 <h3>
                     <span id="fullname">fullname</span>
                 </h3>
                 <ul data-role="listview" data-inset="true" class="ui-listview" id="user-1">
 
                 </ul>
-            </div>
 
-        </div>
 
         <div data-role="collapsible-set" data-theme="a" data-content-theme="d">
             <div data-role="collapsible" data-collapsed="false">
@@ -418,8 +419,8 @@
 
 
                 <ul data-role="listview" data-inset="true" class="ui-listview">
-                    <li class="ui-li ui-li-static ui-body-c"> <span id="weare">Πόσοι ψάχνουν σπίτι</span>
-                    <li class="ui-li ui-li-static ui-body-c"> <span id="looking">Μέγιστος επιθυμητός αριθμός συγκατοίκων</span>
+                    <li class="ui-li ui-li-static ui-body-c"><span id="weare">Πόσοι ψάχνουν σπίτι</span>
+                    <li class="ui-li ui-li-static ui-body-c"><span id="looking">Μέγιστος επιθυμητός αριθμός συγκατοίκων</span>
                     <li class="ui-li ui-li-static ui-body-c"> Ζευγάρι: όχι
                     <li class="ui-li ui-li-static ui-body-c"> Παιδί: όχι
                     <li class="ui-li ui-li-static ui-body-c"> Κατοικίδιο: όχι
@@ -486,7 +487,7 @@
             <li class="ui-li ui-li-static ui-body-c" id="area">
             <li class="ui-li ui-li-static ui-body-c" id="address">
             <li class="ui-li ui-li-static ui-body-c" id="dimos">
-            <li class="ui-li ui-li-static ui-body-c"  id="price">
+            <li class="ui-li ui-li-static ui-body-c" id="price">
 
         </ul>
 
@@ -500,11 +501,11 @@
                 <ul data-role="listview" data-inset="true" class="ui-listview">
                     <li class="ui-li ui-li-static ui-body-c">Υπνοδωμάτια : <span id="bedrooms"></span>
                     <li class="ui-li ui-li-static ui-body-c">Μπάνια : <span id="bathrooms"></span>
-                    <li class="ui-li ui-li-static ui-body-c"> <span id="floor"></span>
+                    <li class="ui-li ui-li-static ui-body-c"><span id="floor"></span>
                     <li class="ui-li ui-li-static ui-body-c">Έτος κατασκευής : <span id="year"></span>
                     <li class="ui-li ui-li-static ui-body-c">Θέρμανση : <span id="heating"></span>
                     <li class="ui-li ui-li-static ui-body-c">Διαθέσιμο από : <span id="available"></span>
-                    <li class="ui-li ui-li-static ui-body-c">Διαμένουν :  <span id="living"></span>
+                    <li class="ui-li ui-li-static ui-body-c">Διαμένουν : <span id="living"></span>
                     <li class="ui-li ui-li-static ui-body-c">Διαθέσιμες θέσεις : <span id="availability"></span>
                     <li class="ui-li ui-li-static ui-body-c">Απόσταση από ΤΕΙ : <span id="distance"></span>
                 </ul>
@@ -532,7 +533,8 @@
 
         <div>
 
-            <a href="#" data-theme="a" data-role="button" data-icon="arrow-r" data-iconpos="right" onclick="getuser(localStorage.userid);"> Profile ιδιοκτήτη</a>
+            <a href="#" data-theme="a" data-role="button" data-icon="arrow-r" data-iconpos="right"
+               onclick="getuser(localStorage.userid);"> Profile ιδιοκτήτη</a>
 
         </div>
     </div>
@@ -544,11 +546,5 @@
 
 </div>
 
-
-
-<script>
-
-    //App custom javascript
-</script>
 </body>
 </html>
