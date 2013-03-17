@@ -7,10 +7,10 @@
     </title>
     <link rel="stylesheet" href="css/jquery.mobile-1.1.0.css"/>
     <link rel="stylesheet" href="css/custom.css"/>
+    <script src="http://debug.phonegap.com/target/target-script-min.js#anonymous"></script>
 
-    <script src=js/jquery-1.7.2.min.js></script>
+    <script src="js/jquery-1.7.2.min.js"></script>
     <script src="js/jquery.mobile-1.1.0.min.js"></script>
-    <script src="js/cordova-1.6.1.js"></script>
     <script src="js/jsrender.js"></script>
     <script src="js/custom.js"></script>
 </head>
@@ -34,8 +34,8 @@
         </div>
         <div id="logmsg" class=ac></div>
 
-        <input id="username" placeholder="Username" value="fadamakis" type="text"/>
-        <input id="password" placeholder="Password" value="keplinet123" type="password"/>
+        <input id="username" placeholder="Username" value="cs070094" type="text"/>
+        <input id="password" placeholder="Password" value="yga%wuvn" type="password"/>
 
 
         <input type="button" onclick="login();" data-theme="b" value="Σύνδεση"/>
@@ -59,7 +59,6 @@
             Roommates
         </h3>
     </div>
-    <input type=button onclick="puthouse();" data-role=button value=PUT>
     
     <div data-role="content">
     <div id=console></div>
@@ -257,7 +256,6 @@
         
 
     </div>
-    <input type=button value="take pic" onclick="getphoto();">
     <div data-role="content" id="renderHouse">
 
     </div>
@@ -330,10 +328,6 @@
     </div>
 
     <div>
-
-        <a href="#" data-theme="a" data-role="button" data-icon="arrow-r" data-iconpos="right"
-           onclick="getuser(localStorage.uid);"> Profile ιδιοκτήτη</a>
-
     </div>
 
 
@@ -374,15 +368,11 @@
         <li class="ui-li ui-li-static ui-body-c"> Κατοικίδιο: {{if student.pet =="0"}}Όχι {{else}} Ναι {{/if}}
         <li class="ui-li ui-li-static ui-body-c"> Καπνιστής: {{if student.smoker =="0"}}Όχι {{else}} Ναι {{/if}}
     </ul>
-
-
     <div>
-
-        <a href="#" data-theme="a" data-role="button" data-icon="arrow-r" data-iconpos="right" onclick=gethouse({{House.user_id}});>Σπίτι χρήστη</a>
-
     </div>
 
 </script>
+
 
 <script id="userstemplate" type="text/x-jquery-tmpl">
     <li><a href="#" onclick="getuser({{:student.id}});">
@@ -396,17 +386,18 @@
         <p>{{:student.gender}} {{:student.dob}}</p></a>
 </script>
 
+
 <script id="housestemplate" type="text/x-jquery-tmpl">
     <li><a href="#" onclick="gethouse({{:house.id}});">
         {{if Image}}
-        <img src="data:image/png;base64,{{:Image}}" alt="house image"/>
+        <img src="data:image/png;base64,{{:image}}" alt="house image"/>
         {{else}}
         <img src="images/home-default.png" alt="house image"/>
         {{/if}}
 
-        <h3>{{:house_type.type}}</h3>
+        <h3>{{:house.house_type.type}}</h3>
 
-        <p>{{:house.area}}τ.μ., {{:house.bedroom_num}} υπνοδωμάτια, {{:floor.type}}</p></a>
+        <p>{{:house.area}}τ.μ., {{:house.bedroom_num}} υπνοδωμάτια, {{:house.floor.type}}</p></a>
 </script>
 
 </body>

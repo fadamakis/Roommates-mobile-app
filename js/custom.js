@@ -1,6 +1,7 @@
 var baseurl;
-baseurl = "http://localhost/w/roommates";
-//baseurl = "https://roommates.teiath.gr";
+var loginok;
+// baseurl = "http://localhost/w/roommates";
+baseurl = "https://roommates.teiath.gr";
 //baseurl = "http://roommates.edu.teiath.gr";
 
 
@@ -8,12 +9,15 @@ baseurl = "http://localhost/w/roommates";
 function login() {
     username = $("#username").val();
     password = $("#password").val();
+    if(loginok){
+        $.mobile.changePage("#index");
+    }
     if (username && password) {
         localStorage.username = username;
         localStorage.password = password;
         $("#logmsg").html(" <h5>Γίνεται αυθεντικοποίηση...</h5>");
         $.mobile.showPageLoadingMsg();
-        
+
         $.ajax
             ({
                 type:"GET",
@@ -26,8 +30,7 @@ function login() {
                     xhr.setRequestHeader('accept', 'application/json');
                 },
                 success:function (data) {
-                	console.log(data);
-
+                    loginok = true;
                     var items = [];
                     $.each(data, function (key, val) {
                     	if (val.student) {
@@ -44,7 +47,7 @@ function login() {
                         $("#logmsg").html(" <h5>Ελέγξτε τα στοιχεία σας και προσπαθήστε ξανά...</h5>");
                     }
                     else {
-                        $.mobile.changePage("#index", {transition: "flip"});
+                        $.mobile.changePage("#index");
 
                     }
                 },
@@ -86,49 +89,12 @@ function gethouse(hid) {
                 xhr.setRequestHeader('accept', 'application/json');
             },
             success:function (data) {
-                console.log(data);
+                // console.log(data);
                 $("#renderHouse").html($("#housetemplate").render(data));
                 $.mobile.hidePageLoadingMsg();
-                $.mobile.changePage("#home", {transition: "flip"});
+                $.mobile.changePage("#home");
+                $("#renderHouse").find(":jqmData(role=listview)").listview();
 
-            }
-        });
-}
-
-function puthouse() {
-    $.ajax
-        ({
-            type:"GET",
-            url:baseurl + "/webservice/house/4",
-            beforeSend:function (xhr) {
-                xhr.setRequestHeader('accept', 'application/json');
-            },
-            success:function (data) {
-            	console.log(data);
-
-                    $.ajax
-                        ({
-                            type:"PUT",
-                            dataType:"application/json",
-                            url:baseurl + "/webservice/house/4",
-                            data:data[0],
-                            beforeSend:function (xhr) {
-                                var creds = localStorage.username + ":" + localStorage.password;
-                                var basicScheme = btoa(creds);
-                                var hashStr = "Basic " + basicScheme;
-                                xhr.setRequestHeader('Authorization', hashStr);
-                            },
-                            success:function (message) {
-                            	console.log(message);
-                                $("#console").html("4"+message.responseText);
-                            },
-                            error:function (message) {
-                            	console.log(message);
-                            	$("#console").html("5"+message.responseText);
-
-                            }
-
-                });
 
             }
         });
@@ -149,31 +115,20 @@ function getuser(uid) {
                 xhr.setRequestHeader('accept', 'application/json');
             },
             success:function (data) {
-                console.log(data);
+              // console.log(data);
                 $("#renderUser").html($("#usertemplate").render(data));
                 $.mobile.hidePageLoadingMsg();
-                $.mobile.changePage("#student", {transition: "flip"});
-
+                $.mobile.changePage("#student");
+                $("#renderUser").find(":jqmData(role=listview)").listview();
             }
         });
 }
 
-function getphoto() {
 
-	navigator.camera.getPicture(onSuccess, onFail, { quality:50}); 
-
-	function onSuccess(imageData) {
-		alert('ok');
-//		$( '.house-image' ).attr( 'src', 'data:image/jpeg;base64,' + imageData )
-//        $.mobile.changePage("#home");
-
-
-	}
-
-	function onFail(message) {
-	    alert('Failed because: ' + message);
-	}
-	
-
+function logout(){
+    localStorage.removeItem('username');
+    localStorage.removeItem('password');
+    $.mobile.changePage("#index");
+    
 }
 
